@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн-библиотека</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+<div class="container mt-4">
+  {% for book in books %}
+  <div class="card mb-3 book-card">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="static/{{ book.img_src }}" class="card-img" alt="{{ book.title }}">
+      </div>
+      <div class="col-md-8 d-flex align-items-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text"><strong>Автор:</strong> {{ book.author }}</p>
+          <p class="card-text"><strong>Жанры:</strong> {{ book.genres }}</p>
+          {% if book.book_path %}
+          <a href="static/{{ book.book_path }}" class="btn btn-primary" target="_blank">Читать</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</body>
+</html>
