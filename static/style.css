@@ -1,13 +1,28 @@
 .book-card {
-  max-width: 540px; /* ширина карточки, как на скриншоте */
+  max-width: 540px;   /* ширина карточки */
+  width: 100%;        /* адаптивность */
+  margin-bottom: 20px;
 }
 
-.card-img {
-  width: 150px;   /* фиксированная ширина картинки */
-  height: auto;   /* сохраняем пропорции */
-  object-fit: cover; /* красиво обрезает при необходимости */
+.card {
+  display: flex;
+  flex-direction: row;  /* горизонтальное расположение: картинка + текст */
+  height: 150px;        /* высота карточки */
+}
+
+.card-img-top {
+  width: 150px;        /* ширина картинки */
+  height: 100%;        /* растягиваем по высоте карточки */
+  object-fit: cover;
 }
 
 .card-body {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* центрируем текст по вертикали */
+}
+
+.btn {
+  margin-top: auto;  /* кнопка внизу блока текста */
 }
