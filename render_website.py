@@ -4,7 +4,7 @@ import math
 from jinja2 import Environment, FileSystemLoader
 from more_itertools import chunked
 
-TEMPLATE_FILE = 'index.html'  # Шаблон с пагинацией
+TEMPLATE_FILE = 'index.html' 
 PAGES_DIR = 'pages'
 BOOKS_PER_PAGE = 10
 BOOKS_PER_ROW = 2
@@ -13,7 +13,7 @@ os.makedirs(PAGES_DIR, exist_ok=True)
 
 def render_pages():
     """Генерируем страницы с книгами по страницам"""
-    # Загружаем книги
+    
     with open('static/meta_data.json', 'r', encoding='utf-8') as f:
         books = json.load(f)
 
@@ -32,7 +32,7 @@ def render_pages():
             total_pages=total_pages
         )
 
-        # Первая страница в корне
+        
         if i == 1:
             output_file = 'index.html'
         else:

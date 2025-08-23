@@ -5,7 +5,7 @@ from jinja2 import Environment, FileSystemLoader
 from more_itertools import chunked
 from livereload import Server
 
-TEMPLATE_FILE = 'index.html'  # Шаблон с пагинацией
+TEMPLATE_FILE = 'index.html'  
 BOOKS_PER_PAGE = 10
 BOOKS_PER_ROW = 2
 PAGES_DIR = 'pages'
@@ -14,7 +14,7 @@ os.makedirs(PAGES_DIR, exist_ok=True)
 
 def render_pages():
     """Генерируем страницы с книгами по страницам"""
-    # Загружаем книги
+    
     with open('static/meta_data.json', 'r', encoding='utf-8') as f:
         books = json.load(f)
 
@@ -33,7 +33,7 @@ def render_pages():
             total_pages=total_pages
         )
 
-        # Первая страница в корне
+        
         if i == 1:
             output_file = 'index.html'
         else:
@@ -45,9 +45,9 @@ def render_pages():
     print(f"[INFO] Сгенерировано {total_pages} страниц, index.html в корне, остальные в {PAGES_DIR}/")
 
 if __name__ == '__main__':
-    render_pages()  # Генерируем страницы сразу при старте
+    render_pages()  
 
-    # Запуск livereload сервера
+    
     server = Server()
     server.watch('templates/*.html', render_pages)
     server.watch('static/meta_data.json', render_pages)
