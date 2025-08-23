@@ -5,22 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Онлайн-библиотека</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="{% if page_number == 1 %}static/style.css{% else %}../static/style.css{% endif %}">
 </head>
 <body>
 <div class="container mt-4">
+
+  <!-- Пагинатор сверху -->
+  <nav aria-label="Навигация по страницам" class="mb-3">
+    <ul class="pagination justify-content-center">
+
+      <!-- Кнопка Назад -->
+      <li class="page-item {% if page_number == 1 %}disabled{% endif %}">
+        {% if page_number == 1 %}
+          <a class="page-link" href="#">Назад</a>
+        {% elif page_number == 2 %}
+          <a class="page-link" href="../index.html">Назад</a>
+        {% else %}
+          <a class="page-link" href="index{{ page_number - 1 }}.html">Назад</a>
+        {% endif %}
+      </li>
+
+      <!-- Номера страниц -->
+      {% for p in range(1, total_pages + 1) %}
+      <li class="page-item {% if p == page_number %}active{% endif %}">
+        {% if page_number == 1 %}
+          {% if p == 1 %}
+            <a class="page-link" href="index.html">{{ p }}</a>
+          {% else %}
+            <a class="page-link" href="pages/index{{ p }}.html">{{ p }}</a>
+          {% endif %}
+        {% else %}
+          {% if p == 1 %}
+            <a class="page-link" href="../index.html">{{ p }}</a>
+          {% elif p == page_number %}
+            <a class="page-link" href="#">{{ p }}</a>
+          {% else %}
+            <a class="page-link" href="index{{ p }}.html">{{ p }}</a>
+          {% endif %}
+        {% endif %}
+      </li>
+      {% endfor %}
+
+      <!-- Кнопка Вперёд -->
+      <li class="page-item {% if page_number == total_pages %}disabled{% endif %}">
+        {% if page_number == total_pages %}
+          <a class="page-link" href="#">Вперёд</a>
+        {% elif page_number == 1 %}
+          <a class="page-link" href="pages/index2.html">Вперёд</a>
+        {% else %}
+          <a class="page-link" href="index{{ page_number + 1 }}.html">Вперёд</a>
+        {% endif %}
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Карточки книг -->
   {% for row in books_chunks %}
   <div class="row">
     {% for book in row %}
-    <div class="col-md-6 mb-3">
+    <div class="col-sm-12 col-md-6 mb-3">
       <div class="card book-card h-100">
-        <img src="static/{{ book.img_src }}" class="card-img-top" alt="{{ book.title }}">
+        <img src="{% if page_number == 1 %}static/{{ book.img_src }}{% else %}../static/{{ book.img_src }}{% endif %}" class="card-img-top" alt="{{ book.title }}">
         <div class="card-body">
           <h5 class="card-title">{{ book.title }}</h5>
           <p class="card-text"><strong>Автор:</strong> {{ book.author }}</p>
           <p class="card-text"><strong>Жанры:</strong> {{ book.genres }}</p>
           {% if book.book_path %}
-          <a href="static/{{ book.book_path }}" class="btn btn-primary" target="_blank">Читать</a>
+          <a href="{% if page_number == 1 %}static/{{ book.book_path }}{% else %}../static/{{ book.book_path }}{% endif %}" class="btn btn-primary" target="_blank">Читать</a>
           {% endif %}
         </div>
       </div>
@@ -28,6 +80,7 @@
     {% endfor %}
   </div>
   {% endfor %}
+
 </div>
 </body>
 </html>
