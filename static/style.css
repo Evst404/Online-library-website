@@ -1,28 +1,77 @@
+/* Карточка книги */
 .book-card {
-  max-width: 540px;   /* ширина карточки */
-  width: 100%;        /* адаптивность */
-  margin-bottom: 20px;
+  max-width: 600px;     /* шире карточка */
+  width: 100%;
+  margin: 0 auto 30px;  /* по центру + отступ снизу */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Контейнер карточки */
 .card {
   display: flex;
-  flex-direction: row;  /* горизонтальное расположение: картинка + текст */
-  height: 150px;        /* высота карточки */
+  flex-direction: row;
+  min-height: 160px;
 }
 
+/* Изображение */
 .card-img-top {
-  width: 150px;        /* ширина картинки */
-  height: 100%;        /* растягиваем по высоте карточки */
+  width: 160px;
+  height: auto;
   object-fit: cover;
+  border-right: 1px solid #ddd;
 }
 
+/* Тело карточки */
 .card-body {
-  padding: 10px;
+  flex: 1;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;  /* центрируем текст по вертикали */
+  justify-content: space-between;
 }
 
+/* Заголовок */
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Текст */
+.card-text {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* Кнопка */
 .btn {
-  margin-top: auto;  /* кнопка внизу блока текста */
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+/* Пагинатор */
+.pagination {
+  margin: 20px 0;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Разделители */
+hr {
+  border: 0;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 30px 0;
 }
