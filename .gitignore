@@ -1,81 +1,39 @@
-# ---- Python ----
+# Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 *.so
-*.egg
-*.egg-info/
-.eggs/
-dist/
-build/
-develop-eggs/
-.installed.cfg
-*.manifest
-*.spec
 
-# pip / venv
-env/
+# Виртуальное окружение
 venv/
+env/
 .venv/
-ENV/
-env.bak/
-venv.bak/
 
-# poetry / pipenv
-.poetry/
-.pipenv/
-
-# pytest / coverage
-.coverage
-.coverage.*
-.cache
-.pytest_cache/
-htmlcov/
-.tox/
-.nox/
-
-# Jupyter / IPython
-.ipynb_checkpoints/
-*.ipynb~
-
-# ---- Project specific ----
-# Сгенерированные html-страницы
-/pages/
-index.html
-
-# Логи
+# Логи и временные файлы
 *.log
+*.pot
+*.pyc
+*.pkl
+*.db
+*.sqlite3
 
-# Метаданные, временные файлы
-*.tmp
+# IDE и редакторы
+.vscode/
+.idea/
 *.swp
-*.swo
+*~
 
-# ---- OS specific ----
-# macOS
+# Mac OS
 .DS_Store
 .AppleDouble
 .LSOverride
-Icon?
-._*
 
 # Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 
-# ---- IDE ----
-# VSCode
-.vscode/
-.history/
-*.code-workspace
+# dotenv
+.env
 
-# PyCharm
-.idea/
-*.iml
-
-# ---- Node / frontend (если подключишь) ----
-node_modules/
-npm-debug.log
-yarn-error.log
