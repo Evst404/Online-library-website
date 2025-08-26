@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Онлайн-библиотека</title>
 
-    <link rel="stylesheet" href="{% if page_number == 1 %}static/css/bootstrap.min.css{% else %}../static/css/bootstrap.min.css{% endif %}">
-    <link rel="stylesheet" href="{% if page_number == 1 %}static/style.css{% else %}../static/style.css{% endif %}">
+    <link rel="icon" 
+          href="{% if page_number == 1 %}static/{{ 'favicon.ico' | urlencode }}{% else %}../static/{{ 'favicon.ico' | urlencode }}{% endif %}" 
+          type="image/x-icon">
+
+    <link rel="stylesheet" 
+          href="{% if page_number == 1 %}static/css/bootstrap.min.css{% else %}../static/css/bootstrap.min.css{% endif %}">
+
+    <link rel="stylesheet" 
+          href="{% if page_number == 1 %}static/style.css{% else %}../static/style.css{% endif %}">
 </head>
 <body>
 <div class="container mt-4">
 
+    <!-- Пагинатор сверху -->
     <div class="mb-4 p-2 border rounded bg-light">
         <nav aria-label="Навигация по страницам">
             <ul class="pagination justify-content-center mb-0">
@@ -59,18 +67,23 @@
 
     <hr class="my-4">
 
+    <!-- Карточки книг -->
     {% for row in books_chunks %}
         <div class="row mb-4">
             {% for book in row %}
                 <div class="col-sm-12 col-md-6 mb-3">
                     <div class="card book-card h-100 shadow-sm">
-                        <img src="{% if page_number == 1 %}static/{{ book.img_src }}{% else %}../static/{{ book.img_src }}{% endif %}" class="card-img-top" alt="{{ book.title }}">
+                        <!-- Картинки теперь из media/img -->
+                        <img src="{% if page_number == 1 %}media/{{ book.img_src | urlencode }}{% else %}../media/{{ book.img_src | urlencode }}{% endif %}" 
+                             class="card-img-top" alt="{{ book.title }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ book.title }}</h5>
                             <p class="card-text"><strong>Автор:</strong> {{ book.author }}</p>
                             <p class="card-text"><strong>Жанры:</strong> {{ book.genres }}</p>
                             {% if book.book_path %}
-                                <a href="{% if page_number == 1 %}static/{{ book.book_path }}{% else %}../static/{{ book.book_path }}{% endif %}" class="btn btn-primary" target="_blank">Читать</a>
+                                <!-- Книги теперь в media/books -->
+                                <a href="{% if page_number == 1 %}media/{{ book.book_path | urlencode }}{% else %}../media/{{ book.book_path | urlencode }}{% endif %}" 
+                                   class="btn btn-primary" target="_blank">Читать</a>
                             {% endif %}
                         </div>
                     </div>
@@ -81,6 +94,7 @@
 
     <hr class="my-4">
 
+    <!-- Пагинатор снизу -->
     <div class="mt-4 p-2 border rounded bg-light">
         <nav aria-label="Навигация по страницам">
             <ul class="pagination justify-content-center mb-0">
