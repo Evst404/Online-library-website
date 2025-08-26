@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-библиотека</title>
+
+    <link rel="icon" 
+          href="{% if page_number == 1 %}static/{{ 'favicon.ico' | urlencode }}{% else %}../static/{{ 'favicon.ico' | urlencode }}{% endif %}" 
+          type="image/x-icon">
+
+    <link rel="stylesheet" 
+          href="{% if page_number == 1 %}static/css/bootstrap.min.css{% else %}../static/css/bootstrap.min.css{% endif %}">
+
+    <link rel="stylesheet" 
+          href="{% if page_number == 1 %}static/style.css{% else %}../static/style.css{% endif %}">
+</head>
+<body>
+<div class="container mt-4">
+
+    <!-- Пагинатор сверху -->
+    <div class="mb-4 p-2 border rounded bg-light">
+        <nav aria-label="Навигация по страницам">
+            <ul class="pagination justify-content-center mb-0">
+                <li class="page-item {% if page_number == 1 %}disabled{% endif %}">
+                    {% if page_number == 1 %}
+                        <a class="page-link" href="#">Назад</a>
+                    {% elif page_number == 2 %}
+                        <a class="page-link" href="../index.html">Назад</a>
+                    {% else %}
+                        <a class="page-link" href="index{{ page_number - 1 }}.html">Назад</a>
+                    {% endif %}
+                </li>
+
+                {% for p in range(1, total_pages + 1) %}
+                    <li class="page-item {% if p == page_number %}active{% endif %}">
+                        {% if page_number == 1 %}
+                            {% if p == 1 %}
+                                <a class="page-link" href="index.html">{{ p }}</a>
+                            {% else %}
+                                <a class="page-link" href="pages/index{{ p }}.html">{{ p }}</a>
+                            {% endif %}
+                        {% else %}
+                            {% if p == 1 %}
+                                <a class="page-link" href="../index.html">{{ p }}</a>
+                            {% elif p == page_number %}
+                                <a class="page-link" href="#">{{ p }}</a>
+                            {% else %}
+                                <a class="page-link" href="index{{ p }}.html">{{ p }}</a>
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+
+                <li class="page-item {% if page_number == total_pages %}disabled{% endif %}">
+                    {% if page_number == total_pages %}
+                        <a class="page-link" href="#">Вперёд</a>
+                    {% elif page_number == 1 %}
+                        <a class="page-link" href="pages/index2.html">Вперёд</a>
+                    {% else %}
+                        <a class="page-link" href="index{{ page_number + 1 }}.html">Вперёд</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <hr class="my-4">
+
+    <!-- Карточки книг -->
+    {% for row in books_chunks %}
+        <div class="row mb-4">
+            {% for book in row %}
+                <div class="col-sm-12 col-md-6 mb-3">
+                    <div class="card book-card h-100 shadow-sm">
+                        <!-- Картинки теперь из media/img -->
+                        <img src="{% if page_number == 1 %}media/{{ book.img_src | urlencode }}{% else %}../media/{{ book.img_src | urlencode }}{% endif %}" 
+                             class="card-img-top" alt="{{ book.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text"><strong>Автор:</strong> {{ book.author }}</p>
+                            <p class="card-text"><strong>Жанры:</strong> {{ book.genres }}</p>
+                            {% if book.book_path %}
+                                <!-- Книги теперь в media/books -->
+                                <a href="{% if page_number == 1 %}media/{{ book.book_path | urlencode }}{% else %}../media/{{ book.book_path | urlencode }}{% endif %}" 
+                                   class="btn btn-primary" target="_blank">Читать</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <hr class="my-4">
+
+    <!-- Пагинатор снизу -->
+    <div class="mt-4 p-2 border rounded bg-light">
+        <nav aria-label="Навигация по страницам">
+            <ul class="pagination justify-content-center mb-0">
+                ...
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+<script src="{% if page_number == 1 %}static/js/jquery.min.js{% else %}../static/js/jquery.min.js{% endif %}"></script>
+<script src="{% if page_number == 1 %}static/js/popper.min.js{% else %}../static/js/popper.min.js{% endif %}"></script>
+<script src="{% if page_number == 1 %}static/js/bootstrap.min.js{% else %}../static/js/bootstrap.min.js{% endif %}"></script>
+
+</body>
+</html>
