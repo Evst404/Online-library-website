@@ -16,33 +16,17 @@
       <nav aria-label="Навигация по страницам">
         <ul class="pagination justify-content-center mb-0">
           <li class="page-item {% if page_number == 1 %}disabled{% endif %}">
-            {% if page_number == 1 %}
-              <a class="page-link" href="#">Назад</a>
-            {% elif page_number == 2 %}
-              <a class="page-link" href="/index.html">Назад</a>
-            {% else %}
-              <a class="page-link" href="/pages/index{{ page_number - 1 }}.html">Назад</a>
-            {% endif %}
+            <a class="page-link" href="{% if page_number > 2 %}/pages/index{{ page_number - 1 }}.html{% elif page_number == 2 %}/index.html{% else %}#{% endif %}">Назад</a>
           </li>
 
           {% for p in range(1, total_pages + 1) %}
             <li class="page-item {% if p == page_number %}active{% endif %}">
-              {% if p == page_number %}
-                <a class="page-link" href="#">{{ p }}</a>
-              {% elif p == 1 %}
-                <a class="page-link" href="/index.html">{{ p }}</a>
-              {% else %}
-                <a class="page-link" href="/pages/index{{ p }}.html">{{ p }}</a>
-              {% endif %}
+              <a class="page-link" href="{% if p == page_number %}#{% elif p == 1 %}/index.html{% else %}/pages/index{{ p }}.html{% endif %}">{{ p }}</a>
             </li>
           {% endfor %}
 
           <li class="page-item {% if page_number == total_pages %}disabled{% endif %}">
-            {% if page_number == total_pages %}
-              <a class="page-link" href="#">Вперёд</a>
-            {% else %}
-              <a class="page-link" href="{% if page_number == 1 %}/pages/index2.html{% else %}/pages/index{{ page_number + 1 }}.html{% endif %}">Вперёд</a>
-            {% endif %}
+            <a class="page-link" href="{% if page_number < total_pages %}/pages/index{{ page_number + 1 }}.html{% else %}#{% endif %}">Вперёд</a>
           </li>
         </ul>
       </nav>
@@ -75,7 +59,19 @@
     <div class="mt-4 p-2 border rounded bg-light">
       <nav aria-label="Навигация по страницам">
         <ul class="pagination justify-content-center mb-0">
-          ...
+          <li class="page-item {% if page_number == 1 %}disabled{% endif %}">
+            <a class="page-link" href="{% if page_number > 2 %}/pages/index{{ page_number - 1 }}.html{% elif page_number == 2 %}/index.html{% else %}#{% endif %}">Назад</a>
+          </li>
+
+          {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == page_number %}active{% endif %}">
+              <a class="page-link" href="{% if p == page_number %}#{% elif p == 1 %}/index.html{% else %}/pages/index{{ p }}.html{% endif %}">{{ p }}</a>
+            </li>
+          {% endfor %}
+
+          <li class="page-item {% if page_number == total_pages %}disabled{% endif %}">
+            <a class="page-link" href="{% if page_number < total_pages %}/pages/index{{ page_number + 1 }}.html{% else %}#{% endif %}">Вперёд</a>
+          </li>
         </ul>
       </nav>
     </div>
