@@ -5,16 +5,15 @@ import socket
 from jinja2 import Environment, FileSystemLoader
 from more_itertools import chunked
 from livereload import Server
-from dotenv import load_dotenv
+from decouple import config
 
-load_dotenv()
 
-META_FILE = os.getenv('META_FILE', 'static/meta_data.json')
-TEMPLATE_FILE = os.getenv('TEMPLATE_FILE', 'index.html')
-PAGES_DIR = os.getenv('PAGES_DIR', 'pages')
-BOOKS_PER_PAGE = int(os.getenv('BOOKS_PER_PAGE', 10))
-BOOKS_PER_ROW = int(os.getenv('BOOKS_PER_ROW', 2))
-DEFAULT_PORT = int(os.getenv('PORT', 5500))
+META_FILE = config('META_FILE', default='static/meta_data.json')
+TEMPLATE_FILE = config('TEMPLATE_FILE', default='index.html')
+PAGES_DIR = config('PAGES_DIR', default='pages')
+BOOKS_PER_PAGE = config('BOOKS_PER_PAGE', default=10, cast=int)
+BOOKS_PER_ROW = config('BOOKS_PER_ROW', default=2, cast=int)
+DEFAULT_PORT = config('PORT', default=5500, cast=int)
 
 
 def render_pages(meta_file, template_file, pages_dir):
@@ -30,16 +29,21 @@ def render_pages(meta_file, template_file, pages_dir):
 
     os.makedirs(pages_dir, exist_ok=True)
 
-    for i, page_books in enumerate(pages_books, start=1):
+    for page_number, page_books in enumerate(pages_books, start=1):
         books_chunks = list(chunked(page_books, BOOKS_PER_ROW))
 
         rendered = template.render(
             books_chunks=books_chunks,
-            page_number=i,
+            page_number=page_number,
             total_pages=total_pages
         )
 
-        output_file = 'index.html' if i == 1 else os.path.join(pages_dir, f'index{i}.html')
+        output_file = (
+            'index.html'
+            if page_number == 1
+            else os.path.join(pages_dir, f'index{page_number}.html')
+        )
+
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(rendered)
 
