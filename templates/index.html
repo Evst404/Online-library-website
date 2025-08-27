@@ -5,28 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Онлайн-библиотека</title>
 
-  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" 
+        href="{% if page_number == 1 %}static/{{ 'favicon.ico' | urlencode }}{% else %}../static/{{ 'favicon.ico' | urlencode }}{% endif %}" 
+        type="image/x-icon">
+
+  <link rel="stylesheet" 
+        href="{% if page_number == 1 %}static/css/bootstrap.min.css{% else %}../static/css/bootstrap.min.css{% endif %}">
+
+  <link rel="stylesheet" 
+        href="{% if page_number == 1 %}static/style.css{% else %}../static/style.css{% endif %}">
 </head>
 <body>
   <div class="container mt-4">
 
+    <!-- Пагинатор сверху -->
     <div class="mb-4 p-2 border rounded bg-light">
       <nav aria-label="Навигация по страницам">
         <ul class="pagination justify-content-center mb-0">
           <li class="page-item {% if page_number == 1 %}disabled{% endif %}">
-            <a class="page-link" href="{% if page_number > 2 %}/pages/index{{ page_number - 1 }}.html{% elif page_number == 2 %}/index.html{% else %}#{% endif %}">Назад</a>
+            {% if page_number == 1 %}
+              <a class="page-link" href="#">Назад</a>
+            {% elif page_number == 2 %}
+              <a class="page-link" href="../index.html">Назад</a>
+            {% else %}
+              <a class="page-link" href="index{{ page_number - 1 }}.html">Назад</a>
+            {% endif %}
           </li>
 
           {% for p in range(1, total_pages + 1) %}
             <li class="page-item {% if p == page_number %}active{% endif %}">
-              <a class="page-link" href="{% if p == page_number %}#{% elif p == 1 %}/index.html{% else %}/pages/index{{ p }}.html{% endif %}">{{ p }}</a>
+              {% if page_number == 1 %}
+                {% if p == 1 %}
+                  <a class="page-link" href="index.html">{{ p }}</a>
+                {% else %}
+                  <a class="page-link" href="pages/index{{ p }}.html">{{ p }}</a>
+                {% endif %}
+              {% else %}
+                {% if p == 1 %}
+                  <a class="page-link" href="../index.html">{{ p }}</a>
+                {% elif p == page_number %}
+                  <a class="page-link" href="#">{{ p }}</a>
+                {% else %}
+                  <a class="page-link" href="index{{ p }}.html">{{ p }}</a>
+                {% endif %}
+              {% endif %}
             </li>
           {% endfor %}
 
           <li class="page-item {% if page_number == total_pages %}disabled{% endif %}">
-            <a class="page-link" href="{% if page_number < total_pages %}/pages/index{{ page_number + 1 }}.html{% else %}#{% endif %}">Вперёд</a>
+            {% if page_number == total_pages %}
+              <a class="page-link" href="#">Вперёд</a>
+            {% elif page_number == 1 %}
+              <a class="page-link" href="pages/index2.html">Вперёд</a>
+            {% else %}
+              <a class="page-link" href="index{{ page_number + 1 }}.html">Вперёд</a>
+            {% endif %}
           </li>
         </ul>
       </nav>
@@ -34,18 +67,21 @@
 
     <hr class="my-4">
 
+    <!-- Карточки книг -->
     {% for row in books_chunks %}
       <div class="row mb-4">
         {% for book in row %}
           <div class="col-sm-12 col-md-6 mb-3">
             <div class="card book-card h-100 shadow-sm">
-              <img src="/media/{{ book.img_src | urlencode }}" class="card-img-top" alt="{{ book.title }}">
+              <img src="{% if page_number == 1 %}media/{{ book.img_src | urlencode }}{% else %}../media/{{ book.img_src | urlencode }}{% endif %}" 
+                   class="card-img-top" alt="{{ book.title }}">
               <div class="card-body">
                 <h5 class="card-title">{{ book.title }}</h5>
                 <p class="card-text"><strong>Автор:</strong> {{ book.author }}</p>
                 <p class="card-text"><strong>Жанры:</strong> {{ book.genres }}</p>
                 {% if book.book_path %}
-                  <a href="/media/{{ book.book_path | urlencode }}" class="btn btn-primary" target="_blank">Читать</a>
+                  <a href="{% if page_number == 1 %}media/{{ book.book_path | urlencode }}{% else %}../media/{{ book.book_path | urlencode }}{% endif %}" 
+                     class="btn btn-primary" target="_blank">Читать</a>
                 {% endif %}
               </div>
             </div>
@@ -56,31 +92,20 @@
 
     <hr class="my-4">
 
+    <!-- Пагинатор снизу -->
     <div class="mt-4 p-2 border rounded bg-light">
       <nav aria-label="Навигация по страницам">
         <ul class="pagination justify-content-center mb-0">
-          <li class="page-item {% if page_number == 1 %}disabled{% endif %}">
-            <a class="page-link" href="{% if page_number > 2 %}/pages/index{{ page_number - 1 }}.html{% elif page_number == 2 %}/index.html{% else %}#{% endif %}">Назад</a>
-          </li>
-
-          {% for p in range(1, total_pages + 1) %}
-            <li class="page-item {% if p == page_number %}active{% endif %}">
-              <a class="page-link" href="{% if p == page_number %}#{% elif p == 1 %}/index.html{% else %}/pages/index{{ p }}.html{% endif %}">{{ p }}</a>
-            </li>
-          {% endfor %}
-
-          <li class="page-item {% if page_number == total_pages %}disabled{% endif %}">
-            <a class="page-link" href="{% if page_number < total_pages %}/pages/index{{ page_number + 1 }}.html{% else %}#{% endif %}">Вперёд</a>
-          </li>
+          ...
         </ul>
       </nav>
     </div>
 
   </div>
 
-  <script src="/static/js/jquery.min.js"></script>
-  <script src="/static/js/popper.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="{% if page_number == 1 %}static/js/jquery.min.js{% else %}../static/js/jquery.min.js{% endif %}"></script>
+  <script src="{% if page_number == 1 %}static/js/popper.min.js{% else %}../static/js/popper.min.js{% endif %}"></script>
+  <script src="{% if page_number == 1 %}static/js/bootstrap.min.js{% else %}../static/js/bootstrap.min.js{% endif %}"></script>
 
 </body>
 </html>
