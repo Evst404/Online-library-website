@@ -1,185 +1,180 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Онлайн-библиотека</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-библиотека</title>
 
-  <link rel="icon" 
-        href="../static/favicon.ico" 
-        type="image/x-icon">
+    <link rel="icon" 
+          href="../static/favicon.ico" 
+          type="image/x-icon">
 
-  <link rel="stylesheet" 
-        href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" 
+          href="../static/css/bootstrap.min.css">
 
-  <link rel="stylesheet" 
-        href="../static/style.css">
-</head>
-<body>
-  <div class="container mt-4">
+    <link rel="stylesheet" 
+          href="../static/style.css">
+  </head>
+  <body>
+    <div class="container mt-4">
 
-    <!-- Пагинатор сверху -->
-    <div class="mb-4 p-2 border rounded bg-light">
-      <nav aria-label="Навигация по страницам">
-        <ul class="pagination justify-content-center mb-0">
-          <li class="page-item ">
+      <!-- Пагинатор сверху -->
+      <div class="mb-4 p-2 border rounded bg-light">
+        <nav aria-label="Навигация по страницам">
+          <ul class="pagination justify-content-center mb-0">
+            <li class="page-item ">
+              
+                <a class="page-link" href="index9.html">Назад</a>
+              
+            </li>
+
             
-              <a class="page-link" href="index9.html">Назад</a>
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="../index.html">1</a>
+                  
+                
+              </li>
             
-          </li>
-
-          
-            <li class="page-item ">
-              
+              <li class="page-item ">
                 
-                  <a class="page-link" href="../index.html">1</a>
+                  
+                    <a class="page-link" href="index2.html">2</a>
+                  
                 
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index2.html">2</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index3.html">3</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index4.html">4</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index5.html">5</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index6.html">6</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index7.html">7</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index8.html">8</a>
-                
-              
-            </li>
-          
-            <li class="page-item ">
-              
-                
-                  <a class="page-link" href="index9.html">9</a>
-                
-              
-            </li>
-          
-            <li class="page-item active">
-              
-                
-                  <a class="page-link" href="#">10</a>
-                
-              
-            </li>
-          
-
-          <li class="page-item disabled">
+              </li>
             
-              <a class="page-link" href="#">Вперёд</a>
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index3.html">3</a>
+                  
+                
+              </li>
             
-          </li>
-        </ul>
-      </nav>
-    </div>
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index4.html">4</a>
+                  
+                
+              </li>
+            
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index5.html">5</a>
+                  
+                
+              </li>
+            
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index6.html">6</a>
+                  
+                
+              </li>
+            
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index7.html">7</a>
+                  
+                
+              </li>
+            
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index8.html">8</a>
+                  
+                
+              </li>
+            
+              <li class="page-item ">
+                
+                  
+                    <a class="page-link" href="index9.html">9</a>
+                  
+                
+              </li>
+            
+              <li class="page-item active">
+                
+                  
+                    <a class="page-link" href="#">10</a>
+                  
+                
+              </li>
+            
 
-    <hr class="my-4">
-
-    <!-- Карточки книг -->
-    
-      <div class="row mb-4">
-        
-          <div class="col-sm-12 col-md-6 mb-3">
-            <div class="card book-card h-100 shadow-sm">
-              <!-- Картинки теперь из media/img -->
-              <img src="../media/img/nopic.gif" 
-                   class="card-img-top" alt="А все из-за любви">
-              <div class="card-body">
-                <h5 class="card-title">А все из-за любви</h5>
-                <p class="card-text"><strong>Автор:</strong> Гуларт Рон</p>
-                <p class="card-text"><strong>Жанры:</strong> Научная фантастика</p>
-                
-                  <!-- Книги теперь в media/books -->
-                  <a href="../media/books/18974-%D0%90%20%D0%B2%D1%81%D0%B5%20%D0%B8%D0%B7-%D0%B7%D0%B0%20%D0%BB%D1%8E%D0%B1%D0%B2%D0%B8.txt" 
-                     class="btn btn-primary" target="_blank">Читать</a>
-                
-              </div>
-            </div>
-          </div>
-        
-          <div class="col-sm-12 col-md-6 mb-3">
-            <div class="card book-card h-100 shadow-sm">
-              <!-- Картинки теперь из media/img -->
-              <img src="../media/img/nopic.gif" 
-                   class="card-img-top" alt="Абсолютное оружие Горгон">
-              <div class="card-body">
-                <h5 class="card-title">Абсолютное оружие Горгон</h5>
-                <p class="card-text"><strong>Автор:</strong> Щербаков Владимир</p>
-                <p class="card-text"><strong>Жанры:</strong> Научная фантастика</p>
-                
-                  <!-- Книги теперь в media/books -->
-                  <a href="../media/books/18996-%D0%90%D0%B1%D1%81%D0%BE%D0%BB%D1%8E%D1%82%D0%BD%D0%BE%D0%B5%20%D0%BE%D1%80%D1%83%D0%B6%D0%B8%D0%B5%20%D0%93%D0%BE%D1%80%D0%B3%D0%BE%D0%BD.txt" 
-                     class="btn btn-primary" target="_blank">Читать</a>
-                
-              </div>
-            </div>
-          </div>
-        
+            <li class="page-item disabled">
+              
+                <a class="page-link" href="#">Вперёд</a>
+              
+            </li>
+          </ul>
+        </nav>
       </div>
-    
 
-    <hr class="my-4">
+      <hr class="my-4">
 
-    <!-- Пагинатор снизу -->
-    <div class="mt-4 p-2 border rounded bg-light">
-      <nav aria-label="Навигация по страницам">
-        <ul class="pagination justify-content-center mb-0">
-          ...
-        </ul>
-      </nav>
+      <!-- Карточки книг -->
+      
+        <div class="row mb-4">
+          
+            <div class="col-sm-12 col-md-6 mb-3">
+              <div class="card book-card h-100 shadow-sm">
+                <img src="../media/img/nopic.gif" 
+                     class="card-img-top" alt="А все из-за любви">
+                <div class="card-body">
+                  <h5 class="card-title">А все из-за любви</h5>
+                  <p class="card-text"><strong>Автор:</strong> Гуларт Рон</p>
+                  <p class="card-text"><strong>Жанры:</strong> Научная фантастика</p>
+                  
+                    <a href="../media/books/18974-%D0%90%20%D0%B2%D1%81%D0%B5%20%D0%B8%D0%B7-%D0%B7%D0%B0%20%D0%BB%D1%8E%D0%B1%D0%B2%D0%B8.txt" 
+                       class="btn btn-primary" target="_blank">Читать</a>
+                  
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-sm-12 col-md-6 mb-3">
+              <div class="card book-card h-100 shadow-sm">
+                <img src="../media/img/nopic.gif" 
+                     class="card-img-top" alt="Абсолютное оружие Горгон">
+                <div class="card-body">
+                  <h5 class="card-title">Абсолютное оружие Горгон</h5>
+                  <p class="card-text"><strong>Автор:</strong> Щербаков Владимир</p>
+                  <p class="card-text"><strong>Жанры:</strong> Научная фантастика</p>
+                  
+                    <a href="../media/books/18996-%D0%90%D0%B1%D1%81%D0%BE%D0%BB%D1%8E%D1%82%D0%BD%D0%BE%D0%B5%20%D0%BE%D1%80%D1%83%D0%B6%D0%B8%D0%B5%20%D0%93%D0%BE%D1%80%D0%B3%D0%BE%D0%BD.txt" 
+                       class="btn btn-primary" target="_blank">Читать</a>
+                  
+                </div>
+              </div>
+            </div>
+          
+        </div>
+      
+
+      <hr class="my-4">
+
+      <!-- Пагинатор снизу -->
+      <div class="mt-4 p-2 border rounded bg-light">
+        <nav aria-label="Навигация по страницам">
+          <ul class="pagination justify-content-center mb-0">
+            ...
+          </ul>
+        </nav>
+      </div>
+
     </div>
 
-  </div>
-
-  <script src="../static/js/jquery.min.js"></script>
-  <script src="../static/js/popper.min.js"></script>
-  <script src="../static/js/bootstrap.min.js"></script>
-
-</body>
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+  </body>
 </html>
